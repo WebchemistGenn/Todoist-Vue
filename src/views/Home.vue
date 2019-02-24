@@ -1,11 +1,20 @@
 <template>
   <div class="Home">
-    <form @submit="handleSubmit">
+    <form @submit.prevent="handleSubmit">
       <input type="text" class="content" name="content" />
-      <button type="submit">ADD</button>
     </form>
     <ul class="list">
-      <li class="item" v-for="item in activeList" :key="item.id">{{ item.context }}</li>
+      <li class="item" :class="{ 'active': item.completedAt !== null }" v-for="(item, index) in activeList" :key="item.id">
+        <div class="checkbox">
+          <input type="checkbox" @change="handleCheck(index)" />
+        </div>
+        <div class="content">
+          {{ item.content }}
+        </div>
+        <div class="remove">
+          <button class="remove" @click="handleDelete(index)">삭제</button>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
@@ -16,7 +25,7 @@ import { Component, Emit, Vue } from "vue-property-decorator";
 
 interface Todo {
   id: number;
-  context: string | null;
+  content: string | null;
   createdAt: number | null;
   completedAt: number | null;
 }
@@ -28,7 +37,7 @@ export default class Home extends Vue {
   private active: string = "All";
   private form: Todo = {
     id: 0,
-    context: "",
+    content: "",
     createdAt: null,
     completedAt: null,
   };
@@ -42,7 +51,6 @@ export default class Home extends Vue {
   }
 
   private handleSubmit(event: HTMLFormElement) {
-    event.preventDefault();
     // 최대큰 수를 찾습니다.
     const id = this.list.reduce((curr, acc) => {
       return Math.max(curr, acc.id);
@@ -50,11 +58,87 @@ export default class Home extends Vue {
 
     const form = new FormData(event.currentTarget);
     this.form.id = id + 1;
-    this.form.context = form.get("content") as string;
+    this.form.content = form.get("content") as string;
     this.form.createdAt = new Date().getTime();
     this.list.unshift({ ...this.form });
     localStorage.setItem("todolist", JSON.stringify(this.list));
     event.currentTarget.reset();
   }
+
+  private handleCheck(index: number) {
+    this.list = this.list.map((item, i) => {
+      if (index === i && item.completedAt === null) {
+        item.completedAt = new Date().getTime();
+      } else if (index === i && item.completedAt !== null) {
+        item.completedAt = null;
+      }
+      return item;
+    });
+    localStorage.setItem("todolist", JSON.stringify(this.list));
+  }
+
+  private handleDelete(index: number) {
+    this.list = this.list.filter((item, i) => index !== i);
+    localStorage.setItem("todolist", JSON.stringify(this.list));
+  }
 }
 </script>
+
+<style lang="scss" scoped>
+div.Home {
+  width: 550px;
+  margin: 0 auto;
+  border: 1px solid #eee;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1);
+
+  input.content {
+    width: 548px;
+    height: 65px;
+    padding: 0 20px 0 70px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    outline: none;
+    font-size: 28px;
+    font-weight: 100;
+    background-color: rgba(0, 0, 0, 0.003);
+  }
+
+  ul.list {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li.item {
+      width: 550px;
+      height: 65px;
+      line-height: 65px;
+      border-bottom: 1px solid #eee;
+
+      div {
+        display: inline-block;
+
+        &.checkbox {
+          width: 50px;
+        }
+
+        &.content {
+          width: 450px;
+          text-align: left;
+          font-size: 24px;
+          font-weight: 100;
+        }
+
+        &.remove {
+          width: 50px;
+        }
+      }
+
+      &.active div.content {
+        color: #ddd;
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+</style>
