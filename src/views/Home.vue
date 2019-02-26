@@ -6,7 +6,7 @@
     <ul class="list">
       <li class="item" :class="{ 'active': item.completedAt !== null }" v-for="(item, index) in activeList" :key="item.id">
         <div class="checkbox">
-          <input type="checkbox" @change="handleCheck(index)" />
+          <input type="checkbox" @change="handleCheck(index)" :checked="item.completedAt !== null" />
         </div>
         <div class="content">
           {{ item.content }}
@@ -16,6 +16,12 @@
         </div>
       </li>
     </ul>
+    <div>
+      <button class="changeAll" @click="handleChangeActive('ALL')">ALL</button>
+      <button class="changeActive" @click="handleChangeActive('ACTIVE')">ACTIVE</button>
+      <button class="changeCompleted" @click="handleChangeActive('COMPLETED')">COMPLETED</button>
+      <button class="allRemove" @click="handleAllDelete">초기화</button>
+    </div>
   </div>
 </template>
 
@@ -34,7 +40,7 @@ interface Todo {
 @Component({})
 export default class Home extends Vue {
   private list: Todo[] = JSON.parse(localStorage.getItem("todolist") || "[]");
-  private active: string = "All";
+  private active: string = "ALL";
   private form: Todo = {
     id: 0,
     content: "",
@@ -42,10 +48,10 @@ export default class Home extends Vue {
     completedAt: null,
   };
 
-  get activeList() {
+  get activeList(): Todo[] {
     switch (this.active) {
-      case "Active": return this.list.filter(item => item.completedAt === null);
-      case "Completed": return this.list.filter(item => item.completedAt !== null);
+      case "ACTIVE": return this.list.filter(item => item.completedAt === null);
+      case "COMPLETED": return this.list.filter(item => item.completedAt !== null);
       default: return this.list;
     }
   }
@@ -79,6 +85,15 @@ export default class Home extends Vue {
 
   private handleDelete(index: number) {
     this.list = this.list.filter((item, i) => index !== i);
+    localStorage.setItem("todolist", JSON.stringify(this.list));
+  }
+
+  private handleChangeActive(active: string) {
+    this.active = active;
+  }
+
+  private handleAllDelete() {
+    this.list = [];
     localStorage.setItem("todolist", JSON.stringify(this.list));
   }
 }
