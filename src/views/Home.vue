@@ -16,7 +16,7 @@
         </div>
       </li>
     </ul>
-    <div>
+    <div class="buttons">
       <button class="changeAll" @click="handleChangeActive('ALL')">ALL</button>
       <button class="changeActive" @click="handleChangeActive('ACTIVE')">ACTIVE</button>
       <button class="changeCompleted" @click="handleChangeActive('COMPLETED')">COMPLETED</button>
@@ -153,6 +153,12 @@ div.Home {
         color: #ddd;
         text-decoration: line-through;
       }
+    }
+  }
+
+  div.buttons {
+    button {
+      padding: 0 5px;
     }
   }
 }
