@@ -116,10 +116,6 @@ export default class Home extends Vue {
     localStorage.setItem("todolist", JSON.stringify(this.list));
   }
 
-  private handleChangeActive(active: string) {
-    this.active = active;
-  }
-
   private handleClear() {
     this.list = [];
     localStorage.setItem("todolist", JSON.stringify(this.list));
