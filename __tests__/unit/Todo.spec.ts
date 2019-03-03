@@ -5,9 +5,9 @@ import Todo from "@/views/Todo.vue";
 
 describe("Todo.vue", () => {
   const fakeData = [
-    { id: 0, content: "등산하기", createdAt: 1550984912840, completedAt: null },
-    { id: 1, content: "축구하기", createdAt: 1550984912840, completedAt: null },
-    { id: 2, content: "Vue 스터디 참여", createdAt: 1550984912840, completedAt: null },
+    { id: 0, isCompleted: false, content: "등산하기", createdAt: 1550984912840, completedAt: null },
+    { id: 1, isCompleted: false, content: "축구하기", createdAt: 1550984912840, completedAt: null },
+    { id: 2, isCompleted: false, content: "Vue 스터디 참여", createdAt: 1550984912840, completedAt: null },
   ];
 
   Vue.use(Vuetify);
@@ -63,7 +63,7 @@ describe("Todo.vue", () => {
   it("일정의 완료를 취소합니다.", () => {
     const content = TodoView.findAll(".item").at(0).find("input[type=checkbox]");
     content.trigger("click");
-    expect(TodoView.vm.$data.list[0].completedAt).toBe(null);
+    expect(TodoView.vm.$data.list[0].isCompleted).toBe(false);
   });
 
   it("일정을 삭제합니다.", () => {

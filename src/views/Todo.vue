@@ -66,7 +66,6 @@ interface Todo {
 export default class Home extends Vue {
   private list: Todo[] = JSON.parse(localStorage.getItem("todolist") || "[]");
   private active: string = "ALL";
-  private valid: boolean = false;
   private form: Todo = {
     id: 0,
     isCompleted: false,
