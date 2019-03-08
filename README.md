@@ -1,6 +1,6 @@
-## Javscript 주말 스터디 ( Vue로 TodoList 제작하기 )
+## Javscript 주말 스터디 실습 ( Vue로 Todoist Clone 제작 )
 
-> 현재 Typescript와 Decorator를 적용한 템플릿 연습 중이기 때문에 모두 적용해봅니다.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c4e2fe7b-584f-4fe1-8321-4b28ed31be4f/deploy-status)](https://app.netlify.com/sites/webchemist-vue-todoist/deploys)
 
 #### Step1
 - Vue Typescript 기본 설정
