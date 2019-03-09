@@ -27,26 +27,31 @@ export default class DefaultLayout extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-div.default-container {
-  width: 950px;
-  padding-top: 44px;
-  margin: 0 auto;
+div#default-layout {
+  height: 100%;
 
-  div.slidebar {
-    float: left;
-    width: 300px;
+  div.default-container {
+    width: 950px;
     height: 100%;
-    padding-top: 30px;
-  }
+    margin: 0 auto;
+    overflow: hidden;
 
-  div.main {
-    float: right;
-    width: 650px;
-    height: 100%;
-    padding-top: 30px;
-    background-color: #fff;
-    border-left: 1px solid #f1f1f1;
-    border-right: 1px solid #f1f1f1;
+    div.slidebar {
+      float: left;
+      width: 296px;
+      height: 100%;
+      padding: 50px 0 0 30px;
+    }
+
+    div.main {
+      float: right;
+      width: 654px;
+      height: 100%;
+      padding: 50px 0 0;
+      background-color: #fff;
+      border-left: 1px solid #f1f1f1;
+      border-right: 1px solid #f1f1f1;
+    }
   }
 }
 </style>

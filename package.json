@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "svg": "vsvg -s svg-icons -t src/assets --ext ts",
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
@@ -13,7 +14,6 @@
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.5.4",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -23,6 +23,7 @@
     "@vue/cli-plugin-typescript": "^3.4.0",
     "@vue/cli-plugin-unit-jest": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
+    "@vue/component-compiler-utils": "^2.6.0",
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
     "material-design-icons-iconfont": "^4.0.5",
@@ -33,6 +34,7 @@
     "stylelint-processor-html": "^1.0.0",
     "ts-jest": "^23.0.0",
     "typescript": "^3.0.0",
+    "vue-svg-loader": "^0.12.0",
     "vue-template-compiler": "^2.5.21"
   }
 }
