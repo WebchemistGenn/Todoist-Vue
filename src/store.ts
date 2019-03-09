@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     theme: "default",
+    list: JSON.parse(localStorage.getItem("todolist") || "[]"),
   },
   mutations: {},
   actions: {},

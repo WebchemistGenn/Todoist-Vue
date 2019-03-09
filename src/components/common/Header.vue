@@ -5,7 +5,9 @@
         <Logo width="24px" height="24px" color="#fff" />
       </div>
       <div class="right">
-        <input type="text" placeholder="빠른검색" />
+        <form @submit.prevent="handleSubmit">
+          <input type="text" v-model="form.content" placeholder="빠른검색" />
+        </form>
         <div class="button">
           <Setting class="padding" width="24px" height="24px" color="#fff" />
         </div>
@@ -41,7 +43,33 @@ import Setting from "@/assets/setting.svg";
     Setting,
   },
 })
-export default class DefaultLayout extends Vue {}
+export default class Header extends Vue {
+  private form: Todo = {
+    id: 0,
+    isCompleted: false,
+    content: "",
+    createdAt: null,
+    completedAt: null,
+  };
+
+  get list(): Todo[] {
+    return this.$store.state.list;
+  }
+
+  private handleSubmit(event: HTMLFormElement) {
+    // 최대큰 수를 찾습니다.
+    const id = this.list.reduce((curr, acc) => {
+      return Math.max(curr, acc.id);
+    }, 0);
+
+    this.form.id = id + 1;
+    this.form.content = this.form.content;
+    this.form.createdAt = new Date().getTime();
+    this.list.unshift({ ...this.form });
+    localStorage.setItem("todolist", JSON.stringify(this.list));
+    this.form.content = "";
+  }
+}
 </script>
 
 

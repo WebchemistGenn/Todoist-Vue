@@ -3,7 +3,7 @@
     <li class="item" v-for="item in list" :key="item.id">
       <div class="inner">
         <div class="content">
-          <div class="checkbox">
+          <div class="checkbox" @click="handleComplete(item.id)">
             <Check class="check" width="24px" height="24px" />
           </div>
           <span>{{ item.content }}</span>
@@ -15,7 +15,7 @@
       </div>
 
       <div class="menu">
-        <Menu class="menu" color="gray" />
+        <Menu class="menu" color="gray" @click="handleDelete(item.id)" />
       </div>
     </li>
   </div>
@@ -38,6 +38,22 @@ import Check from "@/assets/check.svg";
 })
 export default class Item extends Vue {
   @Prop(Array) private readonly list!: Todo[];
+
+  private handleDelete(id: number) {
+    this.$store.state.list = this.list.filter(item => item.id !== id);
+    localStorage.setItem("todolist", JSON.stringify(this.$store.state.list));
+  }
+
+  private handleComplete(id: number) {
+    this.$store.state.list = this.list.map(item => {
+      if (item.id === id) {
+        item.isCompleted = true;
+        item.completedAt = new Date().getTime();
+      }
+      return item;
+    });
+    localStorage.setItem("todolist", JSON.stringify(this.$store.state.list));
+  }
 }
 </script>
 
