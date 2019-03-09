@@ -2,75 +2,36 @@
   <default-layout>
     <div id="management">
       <p class="title">관리함</p>
+      <div class="has-content" v-if="list.length > 0">
+        <ul class="list">
+          <Item :list="list" />
+        </ul>
+      </div>
+      <AddTodo />
+      <div class="not-content" v-if="list.length === 0">
+        <ManagementSvg class="svg-image" width="220px" height="200px" />
+        <p>모두 지우세요</p>
+        <p>모든 것이 제자리에 정리되어 있습니다.</p>
+        <button>작업 추가</button>
+      </div>
     </div>
-    <!-- <v-layout>
-      <v-flex xs12 sm6 offset-sm3>
-        <v-card>
-          <v-toolbar color="teal accent-4" dark>
-            <v-toolbar-title>TODO List</v-toolbar-title>
-            <v-spacer />
-          </v-toolbar>
-
-          <v-form @submit.prevent="handleSubmit">
-            <v-text-field
-              v-model="form.content"
-              label="할일을 적어주세요."
-              single-line
-              full-width
-              hide-details
-              required
-            ></v-text-field>
-          </v-form>
-
-          <v-divider />
-
-          <v-list two-line class="list">
-            <template v-for="(item, index) in activeList">
-              <v-list-tile :key="item.id" class="item">
-                <v-list-tile-action>
-                  <v-switch v-model="item.isCompleted" color="teal accent-4" @change="handleCheck(index)"/>
-                </v-list-tile-action>
-                <v-list-tile-content>
-                  <v-list-tile-title class="content" v-html="item.content"></v-list-tile-title>
-                  <v-list-tile-sub-title>{{ item.createdAt }}</v-list-tile-sub-title>
-                </v-list-tile-content>
-                <v-list-tile-action>
-                  <v-btn flat color="red" class="remove" @click="handleRemove(index)">삭제</v-btn>
-                </v-list-tile-action>
-              </v-list-tile>
-              <v-divider :key="`divider-${item.id}`" />
-            </template>
-          </v-list>
-
-          <v-card-actions>
-            <v-btn flat color="teal accent-4" class="clear" @click="handleClear">CLEAR</v-btn>
-            <v-spacer></v-spacer>
-            <v-btn dark :flat="active !== 'ALL'" color="teal accent-4" class="all" @click="active = 'ALL'">ALL</v-btn>
-            <v-btn dark :flat="active !== 'ACTIVE'" color="teal accent-4" class="active" @click="active = 'ACTIVE'">ACTIVE</v-btn>
-            <v-btn dark :flat="active !== 'COMPLETED'" color="teal accent-4" class="completed" @click="active = 'COMPLETED'">COMPLETED</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout> -->
   </default-layout>
 </template>
 
 <script lang="ts">
 // tslint:disable no-console
 import { Component, Emit, Vue } from "vue-property-decorator";
+import AddTodo from "@/components/common/AddTodo.vue";
+import Item from "@/components/common/Item.vue";
 import DefaultLayout from "@/layouts/Default.vue";
-
-interface Todo {
-  id: number;
-  isCompleted: boolean;
-  content: string | null;
-  createdAt: number | null;
-  completedAt: number | null;
-}
+import ManagementImgSvg from "@/assets/management-image.svg";
 
 @Component({
   components: {
     DefaultLayout,
+    ManagementImgSvg,
+    AddTodo,
+    Item,
   },
 })
 export default class Home extends Vue {
@@ -135,9 +96,31 @@ export default class Home extends Vue {
 <style lang="scss" scoped>
 div#management {
   text-align: left;
+  padding: 24px 10px 0 30px;
 
   p.title {
-    font-size: 12px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 20px;
+    margin: 0;
   }
+
+  div.has-content {
+    ul.list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  div.not-content {
+    text-align: center;
+
+    svg.svg-image {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
 }
 </style>

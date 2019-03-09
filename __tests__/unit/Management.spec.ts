@@ -1,6 +1,5 @@
 import Vue from "vue";
 import { mount } from "@vue/test-utils";
-import Vuetify from "vuetify";
 import Management from "@/views/Management.vue";
 
 describe("Management.vue", () => {
@@ -9,8 +8,6 @@ describe("Management.vue", () => {
     { id: 1, isCompleted: false, content: "축구하기", createdAt: 1550984912840, completedAt: null },
     { id: 2, isCompleted: false, content: "Vue 스터디 참여", createdAt: 1550984912840, completedAt: null },
   ];
-
-  Vue.use(Vuetify);
 
   const ManagementView = mount(Management);
 
