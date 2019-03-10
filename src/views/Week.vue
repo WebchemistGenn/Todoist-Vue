@@ -20,5 +20,6 @@ export default class Week extends Vue {}
 <style lang="scss" scoped>
 div#week {
   text-align: left;
+  padding: 24px 10px 0 30px;
 }
 </style>
