@@ -20,5 +20,6 @@ export default class Today extends Vue {}
 <style lang="scss" scoped>
 div#today {
   text-align: left;
+  padding: 24px 10px 0 30px;
 }
 </style>

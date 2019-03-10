@@ -25,19 +25,5 @@
 ---
 
 ```
-Test Story ( Management )
-  - FakeData 3개의 일정을 가지고 시작합니다, 그리고 상태는 ALL 입니다.
-  - 일정을 추가합니다.
-  - 일정을 완료합니다.
-  - 상태를 각 차례 변경하여 체크합니다. ( ALL | ACTIVE | COMPLETED )
-  - 일정의 완료를 취소합니다.
-  - 일정을 삭제합니다.
-  - 모든 일정을 초기화합니다.
-
-Test Story ( Today )
-  -
-
-Test Story ( Week )
-  -
 
 ```
