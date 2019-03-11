@@ -6,7 +6,7 @@
       </div>
       <div class="right">
         <form @submit.prevent="handleSubmit">
-          <input type="text" v-model="form.content" placeholder="빠른검색" />
+          <input type="text" v-model="form.content" placeholder="빠른 검색" />
         </form>
         <div class="button">
           <Setting class="padding" width="24px" height="24px" color="#fff" />
