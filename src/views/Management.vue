@@ -4,7 +4,7 @@
       <p class="title">관리함</p>
       <div class="has-content" v-if="activeList.length > 0">
         <ul class="list">
-          <Item :list="activeList" />
+          <List :list="activeList" />
         </ul>
       </div>
       <AddTodo />
@@ -21,9 +21,9 @@
 <script lang="ts">
 // tslint:disable no-console
 import { Component, Vue } from "vue-property-decorator";
-import { mapGetters } from "vuex";
+import moment from "moment";
 import AddTodo from "@/components/common/AddTodo.vue";
-import Item from "@/components/common/Item.vue";
+import List from "@/components/common/List.vue";
 import DefaultLayout from "@/layouts/Default.vue";
 import ManagementImgSvg from "@/assets/management-image.svg";
 
@@ -32,7 +32,7 @@ import ManagementImgSvg from "@/assets/management-image.svg";
     DefaultLayout,
     ManagementImgSvg,
     AddTodo,
-    Item,
+    List,
   },
 })
 export default class Home extends Vue {
@@ -44,6 +44,9 @@ export default class Home extends Vue {
     createdAt: null,
     completedAt: null,
   };
+  private today: any = moment().format("YYYY-MM-DD");
+  private date: any = moment(1551786253400).format("YYYY년 MM월 DD일");
+  private diff: any = moment(moment().diff(1551786253400)).format("DD");
 
   get list(): Todo[] {
     return this.$store.state.list;
@@ -66,30 +69,6 @@ export default class Home extends Vue {
     localStorage.setItem("todolist", JSON.stringify(this.list));
     this.form.content = "";
   }
-
-  // private handleCheck(index: number) {
-  //   this.list = this.list.map((item, i) => {
-  //     if (index === i && item.completedAt === null) {
-  //       item.isCompleted = true;
-  //       item.completedAt = new Date().getTime();
-  //     } else if (index === i && item.completedAt !== null) {
-  //       item.isCompleted = false;
-  //       item.completedAt = null;
-  //     }
-  //     return item;
-  //   });
-  //   localStorage.setItem("todolist", JSON.stringify(this.list));
-  // }
-
-  // private handleRemove(index: number) {
-  //   this.list = this.list.filter((item, i) => index !== i);
-  //   localStorage.setItem("todolist", JSON.stringify(this.list));
-  // }
-
-  // private handleClear() {
-  //   this.list = [];
-  //   localStorage.setItem("todolist", JSON.stringify(this.list));
-  // }
 }
 </script>
 
