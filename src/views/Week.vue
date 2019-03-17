@@ -3,6 +3,7 @@
     <div id="week">
       <p class="title">다음 7일</p>
       <AddTodo />
+      <List />
     </div>
   </default-layout>
 </template>
@@ -11,10 +12,13 @@
 import { Component, Emit, Vue } from "vue-property-decorator";
 import DefaultLayout from "@/layouts/Default.vue";
 import AddTodo from "@/components/common/AddTodo.vue";
+import List from "@/components/common/List.vue";
+
 @Component({
   components: {
     DefaultLayout,
     AddTodo,
+    List,
   },
 })
 export default class Week extends Vue {}

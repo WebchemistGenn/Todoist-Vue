@@ -1,5 +1,5 @@
 <template>
-  <div id="menu-item">
+  <ul class="list">
     <li class="item" v-for="item in list" :key="item.id">
       <div class="inner">
         <div class="content">
@@ -18,7 +18,7 @@
         <Menu class="menu" color="gray" @click="handleDelete(item.id)" />
       </div>
     </li>
-  </div>
+  </ul>
 </template>
 
 <script lang="ts">
