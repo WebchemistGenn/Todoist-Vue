@@ -4,7 +4,7 @@
       <div>
         <Plus class="plus" width="20px" height="20px" color="#CB5647" />
       </div>
-      <span>작업 추가</span>
+      <span @click="handleWrite">작업 추가</span>
     </div>
     <History class="history" width="20px" height="20px" color="gray" />
   </div>
@@ -21,7 +21,11 @@ import History from "@/assets/history.svg";
     History,
   },
 })
-export default class AddTodo extends Vue {}
+export default class AddTodo extends Vue {
+  private handleWrite() {
+    this.$emit("onWrite", true);
+  }
+}
 </script>
 
 <style lang="scss" scoped>

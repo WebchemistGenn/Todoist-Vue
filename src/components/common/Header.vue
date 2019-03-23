@@ -48,6 +48,7 @@ export default class Header extends Vue {
     id: 0,
     isCompleted: false,
     content: "",
+    deadlineAt: null,
     createdAt: null,
     completedAt: null,
   };
