@@ -35,3 +35,34 @@ export default class Calendar extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+div#calendal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 180px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+
+  input {
+    width: 100%;
+    height: 31px;
+    padding: 0 5px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    outline: none;
+  }
+
+  div {
+    height: 31px;
+    line-height: 33px;
+    padding: 0 5px;
+    border-bottom: 1px solid #eee;
+
+    &:nth-last-child(1) {
+      border-bottom: none;
+    }
+  }
+}
+</style>

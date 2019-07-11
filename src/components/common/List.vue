@@ -7,6 +7,7 @@
             <Check class="check" width="24px" height="24px" />
           </div>
           <span>{{ item.content }}</span>
+          <span class="date"> - {{ formatDate(item.deadlineAt) }}</span>
           <Comment class="comment" color="gray" />
         </div>
         <div class="scheduler">
@@ -23,6 +24,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
+import moment from "moment";
 import Menu from "@/assets/menu.svg";
 import Scheduler from "@/assets/scheduler.svg";
 import Comment from "@/assets/comment.svg";
@@ -38,6 +40,10 @@ import Check from "@/assets/check.svg";
 })
 export default class Item extends Vue {
   @Prop(Array) private readonly list!: Todo[];
+
+  private formatDate(date: string) {
+    return moment(date).format("YYYY-MM-DD");
+  }
 
   private handleDelete(id: number) {
     this.$store.state.list = this.list.filter(item => item.id !== id);

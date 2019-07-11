@@ -67,7 +67,8 @@ export default class CreateTodo extends Vue {
 div#create {
   position: relative;
   width: 100%;
-  height: 90px;
+  padding: 5px 0;
+
   input {
     width: 100%;
     height: 31px;
@@ -81,7 +82,7 @@ div#create {
 
   div.calendar {
     position: absolute;
-    top: 0;
+    top: 5px;
     right: 0;
     width: 100px;
     height: 31px;
